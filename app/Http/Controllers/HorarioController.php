@@ -19,9 +19,9 @@ class HorarioController extends Controller
         $request->validate([
             'id_profesor' => 'required|exists:profesores,id_profesor',
             'id_curso' => 'required|exists:cursos,id_curso',
-            'dia_semana' => 'required|string|max:20',
-            'hora_inicio' => 'required|date_format:H:i',
-            'hora_fin' => 'required|date_format:H:i|after:hora_inicio'
+            'dia_semana' => 'required|in:Lunes,Martes,Miercoles,Jueves,Viernes,Sabado',
+            'hora_inicio' => 'required|date_format:H:i:s',
+            'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio'
         ]);
 
         $horario = Horario::create($request->all());
@@ -51,9 +51,9 @@ class HorarioController extends Controller
         $request->validate([
             'id_profesor' => 'required|exists:profesores,id_profesor',
             'id_curso' => 'required|exists:cursos,id_curso',
-            'dia_semana' => 'required|string|max:20',
-            'hora_inicio' => 'required|date_format:H:i',
-            'hora_fin' => 'required|date_format:H:i|after:hora_inicio'
+            'dia_semana' => 'required|in:Lunes,Martes,Miercoles,Jueves,Viernes,Sabado',
+            'hora_inicio' => 'required|date_format:H:i:s',
+            'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio'
         ]);
 
         $horario->update($request->all());

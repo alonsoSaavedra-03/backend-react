@@ -17,9 +17,10 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'codigo' => 'required|string|max:20|unique:cursos,codigo',
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string',
-            'creditos' => 'required|integer|min:1'
+            'descripcion' => 'nullable|string',
+            'creditos' => 'required|integer|min:0'
         ]);
 
         $curso = Curso::create($request->all());
@@ -47,9 +48,10 @@ class CursoController extends Controller
         }
 
         $request->validate([
+            'codigo' => 'required|string|max:20|unique:cursos,codigo,' . $id . ',id_curso',
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string',
-            'creditos' => 'required|integer|min:1'
+            'descripcion' => 'nullable|string',
+            'creditos' => 'required|integer|min:0'
         ]);
 
         $curso->update($request->all());
