@@ -17,12 +17,12 @@ class MatriculaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_alumno' => 'required|integer',
-            'id_curso' => 'required|integer',
+            'id_alumno' => 'required|integer|exists:alumno,id_alumno',
+            'id_curso' => 'required|integer|exists:cursos,id_curso',
             'fecha_matricula' => 'required|date',
-            'estado' => 'required|string|max:20',
+            'estado' => 'required|in:Activo,Retirado,Finalizado',
             'semestre' => 'required|string|max:20',
-            'nora_final' => 'nullable|numeric|min:0|max:10'
+            'nora_final' => 'nullable|numeric|min:0|max:20'
         ]);
 
         $matricula = Matricula::create($request->all());
@@ -50,14 +50,13 @@ class MatriculaController extends Controller
         }
 
         $request->validate([
-            'id_alumno' => 'required|integer',
-            'id_curso' => 'required|integer',
+            'id_alumno' => 'required|integer|exists:alumno,id_alumno',
+            'id_curso' => 'required|integer|exists:cursos,id_curso',
             'fecha_matricula' => 'required|date',
-            'estado' => 'required|string|max:20',
+            'estado' => 'required|in:Activo,Retirado,Finalizado',
             'semestre' => 'required|string|max:20',
-            'nora_final' => 'nullable|numeric|min:0|max:10'
+            'nora_final' => 'nullable|numeric|min:0|max:20'
         ]);
-
         $matricula->update($request->all());
 
         return response()->json($matricula);
